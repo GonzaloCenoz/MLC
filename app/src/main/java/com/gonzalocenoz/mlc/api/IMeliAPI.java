@@ -11,6 +11,6 @@ public interface IMeliAPI {
     public static final int RESPONSE_OK_CODE = 200;
 
     @GET("sites/MLA/search")
-    Call<ProductSearch> searchProducts(@Query("query") String query);
+    Call<ProductSearch> searchProducts(@Query("q") String query);
 
 }

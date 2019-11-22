@@ -31,7 +31,7 @@ public class ProductsSearchViewModel extends ViewModel {
 
     public void searchProducts(String query) {
 
-        Callback callback = new Callback<ProductSearch>() {
+        Callback<ProductSearch> callback = new Callback<ProductSearch>() {
             @Override
             public void onResponse(Call<ProductSearch> call, Response<ProductSearch> response) {
 

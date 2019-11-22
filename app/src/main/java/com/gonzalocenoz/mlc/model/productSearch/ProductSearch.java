@@ -2,19 +2,19 @@ package com.gonzalocenoz.mlc.model.productSearch;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductSearch {
 
+    @SerializedName("results")
+    private ArrayList<ProductSearchItem> products = null;
 
-    @SerializedName("products")
-    private List<ProductSearchItem> products = null;
-
-    public ProductSearch(List<ProductSearchItem> products) {
+    public ProductSearch(ArrayList<ProductSearchItem> products) {
         this.products = products;
     }
 
-    public List<ProductSearchItem> getProducts() {
+    public ArrayList<ProductSearchItem> getProducts() {
         return products;
     }
 }

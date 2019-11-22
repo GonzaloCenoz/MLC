@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MeliAPI {
 
@@ -27,6 +28,7 @@ public class MeliAPI {
             Retrofit r = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
             api = r.create(IMeliAPI.class);

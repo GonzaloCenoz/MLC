@@ -41,5 +41,4 @@ public class ProductSearchItem {
         return thumbnail;
     }
 
-    //tODO : ver si es necesario overridear hashcode y equals para
 }

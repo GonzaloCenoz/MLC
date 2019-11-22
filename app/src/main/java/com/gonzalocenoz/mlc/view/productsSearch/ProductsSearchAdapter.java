@@ -12,20 +12,26 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.Key;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.gonzalocenoz.mlc.R;
 import com.gonzalocenoz.mlc.databinding.ProductSearchItemBinding;
 import com.gonzalocenoz.mlc.model.productSearch.ProductSearchItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsSearchAdapter extends RecyclerView.Adapter<ProductsSearchAdapter.ProductSearchItemViewHolder> {
 
-    List<ProductSearchItem> productSearchItems;
+    List<ProductSearchItem> productSearchItems = new ArrayList<ProductSearchItem>();
     Context context;
-    LayoutInflater layoutInflater;
+//    LayoutInflater layoutInflater;
 
     public ProductsSearchAdapter(Context context) {
+
         this.context = context;
+//        layoutInflater = LayoutInflater.from(context);
     }
 
     @NonNull
@@ -46,12 +52,13 @@ public class ProductsSearchAdapter extends RecyclerView.Adapter<ProductsSearchAd
     @Override
     public int getItemCount()
     {
-        return this.productSearchItems == null? 0: this.productSearchItems.size();
+        return this.productSearchItems != null ? this.productSearchItems.size() : 0;
     }
 
     public void refreshProductSearchItems(List<ProductSearchItem> productSearchItems) {
         this.productSearchItems.clear();
         this.productSearchItems.addAll(productSearchItems);
+        notifyDataSetChanged();
     }
 
     public class ProductSearchItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
@@ -78,7 +85,14 @@ public class ProductsSearchAdapter extends RecyclerView.Adapter<ProductsSearchAd
 
         public void setProductSearchItem(ProductSearchItem productSearchItem) {
             productSearchItemBinding.setProductSearchItem(productSearchItem);
-            Glide.with(imageView).load(productSearchItem.getThumbnail()).into(imageView);
+            //Glide.get().with(imageView).load(productSearchItem.getThumbnail()).into(imageView);
+
+            RequestOptions requestOptions = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop();
+
+            Glide.with(context)
+                    .load(productSearchItem.getThumbnail())
+                    .thumbnail(0.1f)
+                    .into(imageView);
 
         }
     }

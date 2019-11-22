@@ -1,7 +1,9 @@
 package com.gonzalocenoz.mlc.view.productsSearch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 
@@ -16,7 +18,7 @@ import com.gonzalocenoz.mlc.R;
 import com.gonzalocenoz.mlc.model.productSearch.ProductSearchItem;
 
 import java.util.List;
-import java.util.Set;
+
 
 public class ProductsSearchActivity extends AppCompatActivity {
 
@@ -27,8 +29,18 @@ public class ProductsSearchActivity extends AppCompatActivity {
     ProductsSearchViewModel productsSearchViewModel;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
 
@@ -44,6 +56,7 @@ public class ProductsSearchActivity extends AppCompatActivity {
         this.searchView = findViewById(R.id.searchView);
         this.productSearchAdapter = new ProductsSearchAdapter(this);
 
+        recyclerViewProductsSearch.setAdapter(this.productSearchAdapter);
         this.recyclerViewProductsSearch.setLayoutManager(new LinearLayoutManager(this));
 
         //tODO : change layou manager
@@ -54,6 +67,7 @@ public class ProductsSearchActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<ProductSearchItem> productSearchItems) {
                 productSearchAdapter.refreshProductSearchItems(productSearchItems);
+                progressBarLoadingProductSearch.setVisibility(View.INVISIBLE);
             }
         });
     }

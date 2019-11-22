@@ -1,8 +1,6 @@
 package com.gonzalocenoz.mlc.api;
 
-import com.gonzalocenoz.mlc.model.productSearch.ProductSearch;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -22,6 +20,8 @@ public class MeliAPI {
 
             OkHttpClient client = new OkHttpClient.Builder()
                     .addInterceptor(logging)
+                    .readTimeout(15, TimeUnit.SECONDS)
+                    .connectTimeout(30, TimeUnit.SECONDS)
                     .build();
 
 

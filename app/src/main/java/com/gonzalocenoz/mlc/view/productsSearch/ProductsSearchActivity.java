@@ -2,7 +2,6 @@ package com.gonzalocenoz.mlc.view.productsSearch;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -11,11 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gonzalocenoz.mlc.R;
-import com.gonzalocenoz.mlc.model.productSearch.ProductSearchItem;
+import com.gonzalocenoz.mlc.model.productSearch.*;
 
 import java.util.List;
 
@@ -23,9 +23,11 @@ import java.util.List;
 public class ProductsSearchActivity extends AppCompatActivity {
 
     RecyclerView recyclerViewProductsSearch;
+    //RecyclerView recyclerViewProductSearchHistory;
     ProgressBar progressBarLoadingProductSearch;
     SearchView searchView;
     ProductsSearchAdapter productSearchAdapter;
+    //ProductsSearchHistoryAdapter productSearchHistoryAdapter;
     ProductsSearchViewModel productsSearchViewModel;
 
     @Override
@@ -45,21 +47,26 @@ public class ProductsSearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         inflateControls();
-
         setUpControlsBehavior();
-
     }
 
     private void inflateControls() {
         this.recyclerViewProductsSearch = findViewById(R.id.recyclerViewProductsSearch);
+      //  this.recyclerViewProductSearchHistory = findViewById(R.id.recyclerViewProductsSearchHistory);
         this.progressBarLoadingProductSearch = findViewById(R.id.progressBarLoadingProductSearch);
         this.searchView = findViewById(R.id.searchView);
+
+
         this.productSearchAdapter = new ProductsSearchAdapter(this);
 
         recyclerViewProductsSearch.setAdapter(this.productSearchAdapter);
         this.recyclerViewProductsSearch.setLayoutManager(new LinearLayoutManager(this));
 
-        //tODO : change layou manager
+      //  this.productSearchHistoryAdapter= new ProductsSearchHistoryAdapter(this);
+       // this.recyclerViewProductSearchHistory.setAdapter(this.productSearchHistoryAdapter);
+      //this.recyclerViewProductSearchHistory.setLayoutManager(new LinearLayoutManager( this));
+
+
 
         this.productsSearchViewModel = ViewModelProviders.of(this).get(ProductsSearchViewModel.class);
 
@@ -67,20 +74,52 @@ public class ProductsSearchActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<ProductSearchItem> productSearchItems) {
                 productSearchAdapter.refreshProductSearchItems(productSearchItems);
-                progressBarLoadingProductSearch.setVisibility(View.INVISIBLE);
+                progressBarLoadingProductSearch.setVisibility(View.GONE);
+                //recyclerViewProductSearchHistory.setVisibility(View.GONE);
             }
         });
+
+//        this.productsSearchViewModel.getProductSearchHistoryItems().observe(this, new Observer<List<ProductSearchHistoryItem>>() {
+//            @Override
+//            public void onChanged(List<ProductSearchHistoryItem> pshi) {
+//                productSearchHistoryAdapter.refreshProductSearchHistoryItems(pshi);
+//                //progressBarLoadingProductSearch.setVisibility(View.GONE);
+////                historyRV.setVisibility(View.GONE);
+//            }
+//        });
     }
 
 
     private void setUpControlsBehavior() {
+
+        this.searchView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+                if(hasFocus)
+                {
+                    recyclerViewProductsSearch.setVisibility(View.GONE);
+                    searchView.setQueryHint("");
+                    //recyclerViewProductSearchHistory.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    recyclerViewProductsSearch.setVisibility(View.VISIBLE);
+                    searchView.setQueryHint( getString(R.string.searchViewQueryHint));
+                   // recyclerViewProductSearchHistory.setVisibility(View.GONE);
+
+                }
+            }
+        });
 
         this.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
 
                 productsSearchViewModel.searchProducts(query);
-                    return false;
+                progressBarLoadingProductSearch.setVisibility(View.VISIBLE);
+
+                return false;
             }
 
             @Override
@@ -88,6 +127,8 @@ public class ProductsSearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        //this.searchView.requestFocus();
     }
 
 }

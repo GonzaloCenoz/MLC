@@ -3,11 +3,12 @@ package com.gonzalocenoz.mlc.view.productsSearch;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.gonzalocenoz.mlc.api.IMeliAPI;
-import com.gonzalocenoz.mlc.model.productSearch.ProductSearch;
-import com.gonzalocenoz.mlc.model.productSearch.ProductSearchItem;
-import com.gonzalocenoz.mlc.service.productSearch.ProductSearchService;
+import com.gonzalocenoz.mlc.model.productSearch.*;
+import com.gonzalocenoz.mlc.service.ProductService;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -17,29 +18,47 @@ import retrofit2.Response;
 public class ProductsSearchViewModel extends ViewModel {
 
     private MutableLiveData<List<ProductSearchItem>> productSearchItems = new MutableLiveData<>();
-    private ProductSearchService productSearchService;
-    private int errorCode;
+  //  private MutableLiveData<List<ProductSearchHistoryItem>> productSearchHistoryItems= new MutableLiveData<>();
+
+    private ProductService productService;
+    private Integer errorCode;
+   // private SharedPreferencesManager sharedPreferencesManager;
 
     public ProductsSearchViewModel() {
-        this.productSearchService = new ProductSearchService();
+
+        this.productService = new ProductService();
+  //      this.sharedPreferencesManager = new SharedPreferencesManager();
     }
 
     public MutableLiveData<List<ProductSearchItem>> getProductSearchItems() {
         return productSearchItems;
     }
 
+//
+//    public MutableLiveData<List<ProductSearchHistoryItem>> getProductSearchHistoryItems() {
+//        return productSearchHistoryItems;
+//    }
 
-    public void searchProducts(String query) {
+    public void searchProducts(final String query) {
 
         Callback<ProductSearch> callback = new Callback<ProductSearch>() {
             @Override
             public void onResponse(Call<ProductSearch> call, Response<ProductSearch> response) {
 
-                if(response.code() == IMeliAPI.RESPONSE_OK_CODE) {
+                if(response.code() == ProductService.RESPONSE_CODE_OK) {
 
+                    ArrayList<ProductSearchItem> f = response.body().getProducts();
                     productSearchItems.setValue(response.body().getProducts());
+                    errorCode = null;
 
-                    // TODO : empty validation ?
+                    if(f == null || f.isEmpty())
+                    {
+                        errorCode = ProductService.RESPONSE_CODE_NO_CONTENT;
+                    }
+                    else
+                    {
+                        saveProductSearchHistory(query);
+                    }
                 }
                 else
                 {
@@ -50,10 +69,18 @@ public class ProductsSearchViewModel extends ViewModel {
             @Override
             public void onFailure(Call<ProductSearch> call, Throwable t) {
 
-                errorCode = -1;
+                errorCode = ProductService.RESPONSE_CODE_INTERNAL_SERVER_ERROR;
             }
         };
 
-        productSearchService.searchProducts(query,callback);
+        productService.searchProducts(query,callback);
+
+    }
+
+    private void saveProductSearchHistory(String query) {
+        Date currentTime = Calendar.getInstance().getTime();
+//        ProductSearchHistoryItem i = new ProductSearchHistoryItem(query, currentTime);
+//
+//        sharedPreferencesManager.addProductSearchHistory(i);
     }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.gonzalocenoz.mlc.model.productSearch.*;
 import com.gonzalocenoz.mlc.service.ProductService;
+import com.gonzalocenoz.mlc.utils.SharedPreferencesManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,26 +19,25 @@ import retrofit2.Response;
 public class ProductsSearchViewModel extends ViewModel {
 
     private MutableLiveData<List<ProductSearchItem>> productSearchItems = new MutableLiveData<>();
-  //  private MutableLiveData<List<ProductSearchHistoryItem>> productSearchHistoryItems= new MutableLiveData<>();
+    private MutableLiveData<List<ProductSearchHistoryItem>> productSearchHistoryItems= new MutableLiveData<>();
 
     private ProductService productService;
     private Integer errorCode;
-   // private SharedPreferencesManager sharedPreferencesManager;
+    private SharedPreferencesManager sharedPreferencesManager;
 
     public ProductsSearchViewModel() {
 
         this.productService = new ProductService();
-  //      this.sharedPreferencesManager = new SharedPreferencesManager();
     }
 
     public MutableLiveData<List<ProductSearchItem>> getProductSearchItems() {
         return productSearchItems;
     }
 
-//
-//    public MutableLiveData<List<ProductSearchHistoryItem>> getProductSearchHistoryItems() {
-//        return productSearchHistoryItems;
-//    }
+    public MutableLiveData<List<ProductSearchHistoryItem>> getProductSearchHistoryItems() {
+
+        return  productSearchHistoryItems;
+    }
 
     public void searchProducts(final String query) {
 
@@ -79,8 +79,24 @@ public class ProductsSearchViewModel extends ViewModel {
 
     private void saveProductSearchHistory(String query) {
         Date currentTime = Calendar.getInstance().getTime();
-//        ProductSearchHistoryItem i = new ProductSearchHistoryItem(query, currentTime);
-//
-//        sharedPreferencesManager.addProductSearchHistory(i);
+        ProductSearchHistoryItem i = new ProductSearchHistoryItem(query, currentTime);
+
+        sharedPreferencesManager.addProductSearchHistory(i);
     }
+
+    // todo : resolver appcontext
+    public void setSharedPreferences(SharedPreferencesManager sharedPreferencesManager) {
+        this.sharedPreferencesManager =sharedPreferencesManager;
+    }
+
+    public void refreshProductSearchHistory() {
+        this.productSearchHistoryItems.setValue(this.sharedPreferencesManager.getProductSearchHistory());
+    }
+//
+//    public int getProductSearchHistoryVisibility()
+//    {}
+//
+//
+//    public int getProductSearchHistoryVisibility()
+//    {}
 }

@@ -8,6 +8,7 @@
     tools:context=".view.productsSearch.ProductsSearchActivity"
     tools:showIn="@layout/activity_main">
 
+
     <ProgressBar
         android:id="@+id/progressBarLoadingProductSearch"
         android:scaleX="0.1"
@@ -27,13 +28,13 @@
         >
     </androidx.recyclerview.widget.RecyclerView>
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recyclerViewProductsSearchHistory"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:padding="5dp"-->
-<!--        android:visibility="gone"-->
-<!--        app:layout_behavior="@string/appbar_scrolling_view_behavior"        >-->
-<!--    </androidx.recyclerview.widget.RecyclerView>-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewProductsSearchHistory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"        >
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

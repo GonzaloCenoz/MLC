@@ -24,12 +24,12 @@
                 android:foregroundGravity="bottom"
                 android:gravity="center_horizontal|center_vertical"
                 android:paddingLeft="10dp"
-
+                android:focusable="true"
+                android:descendantFocusability="afterDescendants"
                 android:paddingRight="10dp"
                 android:layout_margin="10dp"
-
-
                 android:orientation="horizontal">
+
                 <SearchView
                     android:id="@+id/searchView"
                     android:layout_width="wrap_content"
@@ -41,6 +41,7 @@
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_height="match_parent"
                     android:clickable="true"
+                    android:focusable="true"
                     android:background="@drawable/bg_white_rounded"
 
                     android:gravity="center"

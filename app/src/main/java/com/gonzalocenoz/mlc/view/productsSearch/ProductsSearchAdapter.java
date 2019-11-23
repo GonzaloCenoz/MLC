@@ -69,6 +69,7 @@ public class ProductsSearchAdapter extends RecyclerView.Adapter<ProductsSearchAd
             super(productSearchItemBinding.getRoot());
 
             this.productSearchItemBinding = productSearchItemBinding;
+
             this.productSearchItemBinding.getRoot().setOnClickListener(this);
             imageView = this.productSearchItemBinding.getRoot().findViewById(R.id.imgThumb);
         }

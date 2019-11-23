@@ -1,12 +1,14 @@
 package com.gonzalocenoz.mlc.model.productSearch;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.BaseObservable;
+
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class ProductSearchHistoryItem extends Object{
+public class ProductSearchHistoryItem extends BaseObservable {
 
     @SerializedName("query")
     private String query;
@@ -38,4 +40,9 @@ public class ProductSearchHistoryItem extends Object{
         Boolean isProductSearchHistoryItem =  obj  instanceof ProductSearchHistoryItem;
         return isProductSearchHistoryItem && this.getQuery().equals(((ProductSearchHistoryItem)obj).getQuery());
     }
+
+    public void setSelected() {
+        notifyPropertyChanged(1);
+    }
+
 }

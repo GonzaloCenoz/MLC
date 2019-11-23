@@ -39,6 +39,7 @@ public class ProductsSearchViewModel extends ViewModel {
         return  productSearchHistoryItems;
     }
 
+
     public void searchProducts(final String query) {
 
         Callback<ProductSearch> callback = new Callback<ProductSearch>() {

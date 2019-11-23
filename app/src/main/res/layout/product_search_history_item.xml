@@ -4,7 +4,7 @@
 
     <data>
         <variable name="productSearchHistoryItem"
-            type="com.gonzalocenoz.mlc.model.productSearch.ProductSearchHistoryItem" /> />
+            type="com.gonzalocenoz.mlc.model.productSearch.ProductSearchHistoryItem" />
     </data>
 
     <androidx.cardview.widget.CardView

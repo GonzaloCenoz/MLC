@@ -19,11 +19,13 @@ import java.util.List;
 
 public class ProductsSearchHistoryAdapter extends RecyclerView.Adapter<ProductsSearchHistoryAdapter.ProductSearchHistoryItemViewHolder> {
 
+    private final ProductsSearchViewModel vm;
     List<ProductSearchHistoryItem> productSearchHistoryItems = new ArrayList<ProductSearchHistoryItem>();
     Context context;
 
-    public ProductsSearchHistoryAdapter(Context context) {
+    public ProductsSearchHistoryAdapter(Context context, ProductsSearchViewModel vm) {
         this.context = context;
+        this.vm = vm;
     }
 
     @NonNull
@@ -31,8 +33,9 @@ public class ProductsSearchHistoryAdapter extends RecyclerView.Adapter<ProductsS
     public ProductSearchHistoryItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         ProductSearchHistoryItemBinding b = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.product_search_history_item,parent,false);
-        ProductSearchHistoryItemViewHolder pshvw = new ProductSearchHistoryItemViewHolder(b);
 
+        ProductSearchHistoryItemViewHolder pshvw = new ProductSearchHistoryItemViewHolder(b);
+pshvw.Setvm(vm);
         return pshvw;
     }
 
@@ -59,6 +62,7 @@ public class ProductsSearchHistoryAdapter extends RecyclerView.Adapter<ProductsS
     public class ProductSearchHistoryItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         ProductSearchHistoryItemBinding productSearchHistoryItemBinding;
+        private ProductsSearchViewModel vm;
 
         public ProductSearchHistoryItemViewHolder(ProductSearchHistoryItemBinding productSearchHistoryItemBinding) {
             super(productSearchHistoryItemBinding.getRoot());
@@ -71,12 +75,16 @@ public class ProductsSearchHistoryAdapter extends RecyclerView.Adapter<ProductsS
         public void onClick(View v) {
 
             ProductSearchHistoryItem phi = productSearchHistoryItems.get(getAdapterPosition());
-
+            this.vm.searchProducts(phi.getQuery());
             Toast.makeText(context, phi.getQuery().toString(), Toast.LENGTH_SHORT).show();
         }
 
         public void setProductSearchHistoryItem(ProductSearchHistoryItem productSearchHistoryItem) {
             productSearchHistoryItemBinding.setProductSearchHistoryItem(productSearchHistoryItem);
+        }
+
+        public void Setvm(ProductsSearchViewModel vm) {
+            this.vm= vm;
         }
     }
 }

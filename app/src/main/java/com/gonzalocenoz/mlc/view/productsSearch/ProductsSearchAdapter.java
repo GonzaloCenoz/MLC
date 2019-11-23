@@ -1,11 +1,11 @@
 package com.gonzalocenoz.mlc.view.productsSearch;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.gonzalocenoz.mlc.R;
 import com.gonzalocenoz.mlc.databinding.ProductSearchItemBinding;
 import com.gonzalocenoz.mlc.model.productSearch.*;
+import com.gonzalocenoz.mlc.view.productDetail.ProductDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,8 +81,10 @@ public class ProductsSearchAdapter extends RecyclerView.Adapter<ProductsSearchAd
 
             ProductSearchItem p = productSearchItems.get(getAdapterPosition());
 
-            //TODO : create intent
-            Toast.makeText(context, p.getTitle().toString(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, ProductDetailActivity.class);
+            intent.putExtra(ProductDetailActivity.PRODUCT_DETAIL_KEY, p);
+
+            context.startActivity(intent);
         }
 
         public void setProductSearchItem(ProductSearchItem productSearchItem) {

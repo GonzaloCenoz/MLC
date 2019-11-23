@@ -23,6 +23,11 @@
         <activity
             android:name=".view.productsSearch.ProductsSearchActivity">
         </activity>
+
+
+        <activity
+            android:name=".view.productDetail.ProductDetailActivity">
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

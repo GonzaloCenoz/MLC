@@ -2,7 +2,9 @@ package com.gonzalocenoz.mlc.model.productSearch;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ProductSearchItem {
+import java.io.Serializable;
+
+public class ProductSearchItem implements Serializable {
 
   @SerializedName("id")
   private String id;

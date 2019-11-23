@@ -90,6 +90,16 @@ public class ProductsSearchActivity extends AppCompatActivity {
                 productSearchHistoryAdapter.refreshProductSearchHistoryItems(pshi);
             }
         });
+
+        this.productsSearchViewModel.getProductSearchQuery().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if(!searchView.getQuery().equals(s))
+                {
+                    searchView.setQuery(s,false);
+                }
+            }
+        });
     }
 
 

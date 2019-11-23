@@ -20,6 +20,7 @@ public class ProductsSearchViewModel extends ViewModel {
 
     private MutableLiveData<List<ProductSearchItem>> productSearchItems = new MutableLiveData<>();
     private MutableLiveData<List<ProductSearchHistoryItem>> productSearchHistoryItems= new MutableLiveData<>();
+    private MutableLiveData<String> productSearchQuery = new MutableLiveData<String>();
 
     private ProductService productService;
     private Integer errorCode;
@@ -34,13 +35,20 @@ public class ProductsSearchViewModel extends ViewModel {
         return productSearchItems;
     }
 
+
     public MutableLiveData<List<ProductSearchHistoryItem>> getProductSearchHistoryItems() {
 
         return  productSearchHistoryItems;
     }
 
+    public MutableLiveData<String> getProductSearchQuery() {
+
+        return this.productSearchQuery;
+    }
 
     public void searchProducts(final String query) {
+
+        this.productSearchQuery.setValue(query);
 
         Callback<ProductSearch> callback = new Callback<ProductSearch>() {
             @Override
@@ -93,11 +101,4 @@ public class ProductsSearchViewModel extends ViewModel {
     public void refreshProductSearchHistory() {
         this.productSearchHistoryItems.setValue(this.sharedPreferencesManager.getProductSearchHistory());
     }
-//
-//    public int getProductSearchHistoryVisibility()
-//    {}
-//
-//
-//    public int getProductSearchHistoryVisibility()
-//    {}
 }

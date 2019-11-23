@@ -20,14 +20,14 @@ public class ProductsSearchViewModel extends ViewModel {
 
     private MutableLiveData<List<ProductSearchItem>> productSearchItems = new MutableLiveData<>();
     private MutableLiveData<List<ProductSearchHistoryItem>> productSearchHistoryItems= new MutableLiveData<>();
-    private MutableLiveData<String> productSearchQuery = new MutableLiveData<String>();
+    private MutableLiveData<String> productSearchQuery = new MutableLiveData<>();
+    private MutableLiveData<Integer> errorCode = new MutableLiveData<>();
 
     private ProductService productService;
-    private Integer errorCode;
     private SharedPreferencesManager sharedPreferencesManager;
 
-    public ProductsSearchViewModel() {
-
+    public ProductsSearchViewModel(SharedPreferencesManager spm) {
+        this.sharedPreferencesManager = spm;
         this.productService = new ProductService();
     }
 
@@ -46,6 +46,11 @@ public class ProductsSearchViewModel extends ViewModel {
         return this.productSearchQuery;
     }
 
+    public MutableLiveData<Integer> getProductSearchErrorCode() {
+
+        return this.errorCode;
+    }
+
     public void searchProducts(final String query) {
 
         this.productSearchQuery.setValue(query);
@@ -58,11 +63,10 @@ public class ProductsSearchViewModel extends ViewModel {
 
                     ArrayList<ProductSearchItem> f = response.body().getProducts();
                     productSearchItems.setValue(response.body().getProducts());
-                    errorCode = null;
 
                     if(f == null || f.isEmpty())
                     {
-                        errorCode = ProductService.RESPONSE_CODE_NO_CONTENT;
+                        errorCode.setValue(ProductService.RESPONSE_CODE_NO_CONTENT);
                     }
                     else
                     {
@@ -71,14 +75,13 @@ public class ProductsSearchViewModel extends ViewModel {
                 }
                 else
                 {
-                    errorCode = response.code();
+                    errorCode.setValue( response.code());
                 }
             }
 
             @Override
             public void onFailure(Call<ProductSearch> call, Throwable t) {
-
-                errorCode = ProductService.RESPONSE_CODE_INTERNAL_SERVER_ERROR;
+                errorCode.setValue(ProductService.RESPONSE_CODE_INTERNAL_SERVER_ERROR);
             }
         };
 
@@ -91,11 +94,6 @@ public class ProductsSearchViewModel extends ViewModel {
         ProductSearchHistoryItem i = new ProductSearchHistoryItem(query, currentTime);
 
         sharedPreferencesManager.addProductSearchHistory(i);
-    }
-
-    // todo : resolver appcontext
-    public void setSharedPreferences(SharedPreferencesManager sharedPreferencesManager) {
-        this.sharedPreferencesManager =sharedPreferencesManager;
     }
 
     public void refreshProductSearchHistory() {

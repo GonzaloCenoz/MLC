@@ -13,7 +13,7 @@ public class ProductService {
 
     public static final int RESPONSE_CODE_OK = 200;
     public static final int RESPONSE_CODE_INTERNAL_SERVER_ERROR = 500;
-    public static final int RESPONSE_CODE_NO_CONTENT = 200;
+    public static final int RESPONSE_CODE_NO_CONTENT = 204;
     public static final int RESPONSE_NOT_FOUND = 404;
 
     public void searchProducts(String query, Callback<ProductSearch> callback) {

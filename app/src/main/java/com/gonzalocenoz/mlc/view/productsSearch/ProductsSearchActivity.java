@@ -2,6 +2,7 @@ package com.gonzalocenoz.mlc.view.productsSearch;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -73,7 +75,12 @@ public class ProductsSearchActivity extends AppCompatActivity {
 
         this.productSearchAdapter = new ProductsSearchAdapter(this);
         recyclerViewProductsSearch.setAdapter(this.productSearchAdapter);
-        this.recyclerViewProductsSearch.setLayoutManager(new LinearLayoutManager(this));
+
+
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+            recyclerViewProductsSearch.setLayoutManager(new GridLayoutManager(this,2));
+        else
+            this.recyclerViewProductsSearch.setLayoutManager(new LinearLayoutManager(this));
 
         this.productSearchHistoryAdapter= new ProductsSearchHistoryAdapter(this, productsSearchViewModel);
         this.recyclerViewProductSearchHistory.setAdapter(this.productSearchHistoryAdapter);
@@ -154,7 +161,7 @@ public class ProductsSearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                if(recyclerViewProductSearchHistory.getVisibility() != View.VISIBLE)
+                if(!newText.equals(productsSearchViewModel.getProductSearchQuery().getValue()))
                 {
                     recyclerViewProductSearchHistory.setVisibility(View.VISIBLE);
                     recyclerViewProductsSearch.setVisibility(View.INVISIBLE);
@@ -165,37 +172,12 @@ public class ProductsSearchActivity extends AppCompatActivity {
             }
         });
 
-        this.searchView.requestFocus();
+        if(this.productSearchAdapter.productSearchItems.size() == 0)
+        {
+            this.searchView.requestFocus();
+        }
 
     }
-//
-//    @NotNull
-//    private String getErrorMessage(Integer s) {
-//        String m;
-//        switch (s)
-//        {
-//            case ProductService.RESPONSE_CODE_INTERNAL_SERVER_ERROR:
-//
-//                if(!Utils.getInstance().isInternetAvailable())
-//                {
-//                    m = getString(R.string.internetError);
-//                }
-//                else
-//                {
-//                    m = getString(R.string.internalServerError);
-//                }
-//
-//                break;
-//            case ProductService.RESPONSE_CODE_NO_CONTENT:
-//                m = getString(R.string.noContent);
-//                break;
-//            default:
-//                m =  getString(R.string.genericError) + s.toString();
-//                break;
-//        }
-//        return m;
-//    }
-
 
 
 }

@@ -3,7 +3,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="searchViewQueryHint">Buscar en MecadoLibre</string>
-    <string name="InternalServerError">Parece que hubo un error.</string>
+    <string name="internalServerError">Parece que hubo un error.</string>
+    <string name="internetError">Parece que noy hay internet.</string>
     <string name="noContent">Parece que no hay productos con esa descripción.</string>
     <string name="genericError">"Parece que hubo un error : "</string>
 </resources>

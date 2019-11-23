@@ -1,11 +1,20 @@
 package com.gonzalocenoz.mlc.view.productsSearch;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.gonzalocenoz.mlc.R;
 import com.gonzalocenoz.mlc.model.productSearch.*;
 import com.gonzalocenoz.mlc.service.ProductService;
 import com.gonzalocenoz.mlc.utils.SharedPreferencesManager;
+import com.gonzalocenoz.mlc.utils.Utils;
+import com.gonzalocenoz.mlc.view.MLCApplication;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -98,5 +107,32 @@ public class ProductsSearchViewModel extends ViewModel {
 
     public void refreshProductSearchHistory() {
         this.productSearchHistoryItems.setValue(this.sharedPreferencesManager.getProductSearchHistory());
+    }
+
+    public String getErrorMessage() {
+        String m;
+
+        switch (this.errorCode.getValue())
+        {
+            case ProductService.RESPONSE_CODE_INTERNAL_SERVER_ERROR:
+
+                if(!Utils.getInstance().isInternetAvailable())
+                {
+                    m = MLCApplication.getInstance().getString(R.string.internetError);
+                }
+                else
+                {
+                    m = MLCApplication.getInstance().getString(R.string.internalServerError);
+                }
+
+                break;
+            case ProductService.RESPONSE_CODE_NO_CONTENT:
+                m = MLCApplication.getInstance().getString(R.string.noContent);
+                break;
+            default:
+                m =  MLCApplication.getInstance().getString(R.string.genericError) + this.errorCode.toString();
+                break;
+        }
+        return m;
     }
 }

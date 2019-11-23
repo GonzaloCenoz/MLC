@@ -1,6 +1,9 @@
 package com.gonzalocenoz.mlc.view.productsSearch;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -20,6 +23,9 @@ import com.gonzalocenoz.mlc.model.productSearch.ProductSearchHistoryItem;
 import com.gonzalocenoz.mlc.model.productSearch.ProductSearchItem;
 import com.gonzalocenoz.mlc.service.ProductService;
 import com.gonzalocenoz.mlc.utils.SharedPreferencesManager;
+import com.gonzalocenoz.mlc.utils.Utils;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -60,8 +66,6 @@ public class ProductsSearchActivity extends AppCompatActivity {
         this.recyclerViewProductSearchHistory = findViewById(R.id.recyclerViewProductsSearchHistory);
         this.progressBarLoadingProductSearch = findViewById(R.id.progressBarLoadingProductSearch);
         this.searchView = findViewById(R.id.searchView);
-
-
 
         this.productsSearchViewModel = ViewModelProviders.of(this,
                 new ProductsSearchViewModelFactory(new SharedPreferencesManager(this)))
@@ -127,22 +131,7 @@ public class ProductsSearchActivity extends AppCompatActivity {
                         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
                 );
 
-                String m;
-
-                switch (s)
-                {
-                    case ProductService.RESPONSE_CODE_INTERNAL_SERVER_ERROR:
-                        m = getString(R.string.InternalServerError);
-                        break;
-                    case ProductService.RESPONSE_CODE_NO_CONTENT:
-                        m = getString(R.string.noContent);
-                        break;
-                    default:
-                        m =  getString(R.string.genericError) + s.toString();
-                        break;
-                }
-
-                Toast.makeText(getBaseContext(),m , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), productsSearchViewModel.getErrorMessage() , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -177,6 +166,36 @@ public class ProductsSearchActivity extends AppCompatActivity {
         });
 
         this.searchView.requestFocus();
+
     }
+//
+//    @NotNull
+//    private String getErrorMessage(Integer s) {
+//        String m;
+//        switch (s)
+//        {
+//            case ProductService.RESPONSE_CODE_INTERNAL_SERVER_ERROR:
+//
+//                if(!Utils.getInstance().isInternetAvailable())
+//                {
+//                    m = getString(R.string.internetError);
+//                }
+//                else
+//                {
+//                    m = getString(R.string.internalServerError);
+//                }
+//
+//                break;
+//            case ProductService.RESPONSE_CODE_NO_CONTENT:
+//                m = getString(R.string.noContent);
+//                break;
+//            default:
+//                m =  getString(R.string.genericError) + s.toString();
+//                break;
+//        }
+//        return m;
+//    }
+
+
 
 }

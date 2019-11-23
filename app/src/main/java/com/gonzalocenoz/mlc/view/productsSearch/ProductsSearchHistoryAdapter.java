@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -19,13 +18,13 @@ import java.util.List;
 
 public class ProductsSearchHistoryAdapter extends RecyclerView.Adapter<ProductsSearchHistoryAdapter.ProductSearchHistoryItemViewHolder> {
 
-    private final ProductsSearchViewModel vm;
+    private final ProductsSearchViewModel productsSearchViewModel;
     List<ProductSearchHistoryItem> productSearchHistoryItems = new ArrayList<ProductSearchHistoryItem>();
     Context context;
 
-    public ProductsSearchHistoryAdapter(Context context, ProductsSearchViewModel vm) {
+    public ProductsSearchHistoryAdapter(Context context, ProductsSearchViewModel productsSearchViewModel) {
         this.context = context;
-        this.vm = vm;
+        this.productsSearchViewModel = productsSearchViewModel;
     }
 
     @NonNull
@@ -35,7 +34,8 @@ public class ProductsSearchHistoryAdapter extends RecyclerView.Adapter<ProductsS
         ProductSearchHistoryItemBinding b = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.product_search_history_item,parent,false);
 
         ProductSearchHistoryItemViewHolder pshvw = new ProductSearchHistoryItemViewHolder(b);
-pshvw.Setvm(vm);
+        pshvw.SetProductsSearchViewModel(productsSearchViewModel);
+
         return pshvw;
     }
 
@@ -62,7 +62,7 @@ pshvw.Setvm(vm);
     public class ProductSearchHistoryItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         ProductSearchHistoryItemBinding productSearchHistoryItemBinding;
-        private ProductsSearchViewModel vm;
+        private ProductsSearchViewModel productsSearchViewModel;
 
         public ProductSearchHistoryItemViewHolder(ProductSearchHistoryItemBinding productSearchHistoryItemBinding) {
             super(productSearchHistoryItemBinding.getRoot());
@@ -75,16 +75,15 @@ pshvw.Setvm(vm);
         public void onClick(View v) {
 
             ProductSearchHistoryItem phi = productSearchHistoryItems.get(getAdapterPosition());
-            this.vm.searchProducts(phi.getQuery());
-            Toast.makeText(context, phi.getQuery().toString(), Toast.LENGTH_SHORT).show();
+            this.productsSearchViewModel.searchProducts(phi.getQuery());
         }
 
         public void setProductSearchHistoryItem(ProductSearchHistoryItem productSearchHistoryItem) {
             productSearchHistoryItemBinding.setProductSearchHistoryItem(productSearchHistoryItem);
         }
 
-        public void Setvm(ProductsSearchViewModel vm) {
-            this.vm= vm;
+        public void SetProductsSearchViewModel(ProductsSearchViewModel productsSearchViewModel) {
+            this.productsSearchViewModel = productsSearchViewModel;
         }
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MELI Challenge</string>
+    <string name="app_name">MLC</string>
     <string name="action_settings">Settings</string>
     <string name="searchViewQueryHint">Buscar en MecadoLibre</string>
 </resources>

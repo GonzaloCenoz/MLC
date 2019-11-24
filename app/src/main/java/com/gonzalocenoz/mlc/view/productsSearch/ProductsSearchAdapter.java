@@ -88,7 +88,7 @@ public class ProductsSearchAdapter extends RecyclerView.Adapter<ProductsSearchAd
         }
 
         public void setProductSearchItem(ProductSearchItem productSearchItem) {
-            productSearchItemBinding.setProductSearchItem(productSearchItem);
+            productSearchItemBinding.setProduct(productSearchItem);
 
             RequestOptions requestOptions = new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop();
 

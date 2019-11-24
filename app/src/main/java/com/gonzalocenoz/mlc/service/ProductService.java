@@ -27,6 +27,7 @@ public class ProductService {
     }
 
     public void getProductDetail(String productId, Callback<ProductDetail> callback) {
+
         try
         {
             api.getProductDetail(productId).enqueue(callback);

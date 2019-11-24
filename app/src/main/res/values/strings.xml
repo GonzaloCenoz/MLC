@@ -4,7 +4,19 @@
 
     <string name="searchViewQueryHint">Buscar en MecadoLibre</string>
     <string name="internalServerError">Parece que hubo un error.</string>
-    <string name="internetError">Parece que noy hay internet.</string>
+    <string name="internetError">Parece que no hay internet.</string>
     <string name="noContent">Parece que no hay productos con esa descripción.</string>
     <string name="genericError">"Parece que hubo un error : "</string>
+
+    <string name="condition_new_attibute">new</string>
+    <string name="condition_new_attibute_formatted">Producto nuevo</string>
+    <string name="condition_used_attibute_formatted">Producto usado</string>
+
+    <string name="currency_price_attribute_formatted">%s %.2f</string>
+
+    <string name="accept_mp_attribute_formatted">Acepta MercadoPago : %s</string>
+    <string name="accept_mp_Yes_attribute_formatted">Si</string>
+    <string name="accept_mp_no_attribute_formatted">No</string>
+
+    <string name="available_quantity_attribute_formatted" >Cantidad disponible : %d</string>s
 </resources>

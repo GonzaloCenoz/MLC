@@ -1,10 +1,7 @@
 package com.gonzalocenoz.mlc.view.productsSearch;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -23,11 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gonzalocenoz.mlc.R;
 import com.gonzalocenoz.mlc.model.productSearch.ProductSearchHistoryItem;
 import com.gonzalocenoz.mlc.model.productSearch.ProductSearchItem;
-import com.gonzalocenoz.mlc.service.ProductService;
 import com.gonzalocenoz.mlc.utils.SharedPreferencesManager;
 import com.gonzalocenoz.mlc.utils.Utils;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -138,7 +132,7 @@ public class ProductsSearchActivity extends AppCompatActivity {
                         WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
                 );
 
-                Toast.makeText(getBaseContext(), productsSearchViewModel.getErrorMessage() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), Utils.getInstance().getErrorMessage(s) , Toast.LENGTH_SHORT).show();
             }
         });
 

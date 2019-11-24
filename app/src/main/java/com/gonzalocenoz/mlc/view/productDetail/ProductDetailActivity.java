@@ -15,6 +15,7 @@ import com.gonzalocenoz.mlc.R;
 import com.gonzalocenoz.mlc.databinding.ActivityProductDetailBinding;
 import com.gonzalocenoz.mlc.model.productDetail.ProductPicture;
 import com.gonzalocenoz.mlc.model.productSearch.ProductSearchItem;
+import com.gonzalocenoz.mlc.utils.Utils;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         if(extras == null) {
             selectedProductSearchItem = null;
         } else {
-            selectedProductSearchItem = (ProductSearchItem) extras.getSerializable("PRODUCT_DETAIL_KEY");
+            selectedProductSearchItem = (ProductSearchItem) extras.getSerializable(PRODUCT_DETAIL_KEY);
         }
 
         this.productsDetailViewModel = ViewModelProviders.of(this,
@@ -67,7 +68,8 @@ public class ProductDetailActivity extends AppCompatActivity {
             public void onChanged(Integer errorCode) {
 
                 progressBarLoadingProductDetailImages.setVisibility(View.GONE);
-                Toast.makeText(getBaseContext(), "Error " , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), Utils.getInstance().getErrorMessage(errorCode
+                ), Toast.LENGTH_SHORT).show();
 
             }
         });

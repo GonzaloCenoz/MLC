@@ -40,9 +40,4 @@ public class ProductSearchHistoryItem extends BaseObservable {
         Boolean isProductSearchHistoryItem =  obj  instanceof ProductSearchHistoryItem;
         return isProductSearchHistoryItem && this.getQuery().equals(((ProductSearchHistoryItem)obj).getQuery());
     }
-
-    public void setSelected() {
-        notifyPropertyChanged(1);
-    }
-
 }

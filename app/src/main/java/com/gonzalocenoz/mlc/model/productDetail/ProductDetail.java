@@ -1,21 +1,45 @@
 package com.gonzalocenoz.mlc.model.productDetail;
 
-import com.gonzalocenoz.mlc.model.productSearch.ProductSearchItem;
+import android.graphics.Picture;
+
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Set;
+import java.util.List;
 
 public class ProductDetail {
 
+    @SerializedName("id")
+    private String id;
 
-    @SerializedName("products")
-    private Set<ProductSearchItem> products = null;
+    @SerializedName("title")
+    private String title;
 
-    public ProductDetail(Set<ProductSearchItem> products) {
-        this.products = products;
+    @SerializedName("currency_id")
+    private String currencyId;
+
+    @SerializedName("price")
+    private String price;
+
+    @SerializedName("pictures")
+    private List<ProductPicture> pictures;
+
+    public String getId() {
+        return id;
     }
 
-    public Set<ProductSearchItem> getProducts() {
-        return products;
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCurrencyId() {
+        return currencyId;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public List<ProductPicture> getPictures() {
+        return pictures;
     }
 }

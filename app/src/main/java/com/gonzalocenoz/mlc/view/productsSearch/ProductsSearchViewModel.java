@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.gonzalocenoz.mlc.R;
+import com.gonzalocenoz.mlc.api.MeliAPI;
 import com.gonzalocenoz.mlc.model.productSearch.ProductSearch;
 import com.gonzalocenoz.mlc.model.productSearch.ProductSearchHistoryItem;
 import com.gonzalocenoz.mlc.model.productSearch.ProductSearchItem;
@@ -64,14 +65,14 @@ public class ProductsSearchViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ProductSearch> call, Response<ProductSearch> response) {
 
-                if(response.code() == ProductService.RESPONSE_CODE_OK) {
+                if(response.code() == MeliAPI.RESPONSE_CODE_OK) {
 
                     ArrayList<ProductSearchItem> f = response.body().getProducts();
                     productSearchItems.setValue(response.body().getProducts());
 
                     if(f == null || f.isEmpty())
                     {
-                        errorCode.setValue(ProductService.RESPONSE_CODE_NO_CONTENT);
+                        errorCode.setValue(MeliAPI.RESPONSE_CODE_NO_CONTENT);
                     }
                     else
                     {
@@ -86,7 +87,7 @@ public class ProductsSearchViewModel extends ViewModel {
 
             @Override
             public void onFailure(Call<ProductSearch> call, Throwable t) {
-                errorCode.setValue(ProductService.RESPONSE_CODE_INTERNAL_SERVER_ERROR);
+                errorCode.setValue(MeliAPI.RESPONSE_CODE_INTERNAL_SERVER_ERROR);
             }
         };
 
@@ -110,7 +111,7 @@ public class ProductsSearchViewModel extends ViewModel {
 
         switch (this.errorCode.getValue())
         {
-            case ProductService.RESPONSE_CODE_INTERNAL_SERVER_ERROR:
+            case MeliAPI.RESPONSE_CODE_INTERNAL_SERVER_ERROR:
 
                 if(!Utils.getInstance().isInternetAvailable())
                 {
@@ -122,7 +123,7 @@ public class ProductsSearchViewModel extends ViewModel {
                 }
 
                 break;
-            case ProductService.RESPONSE_CODE_NO_CONTENT:
+            case MeliAPI.RESPONSE_CODE_NO_CONTENT:
                 m = MLCApplication.getInstance().getString(R.string.noContent);
                 break;
             default:

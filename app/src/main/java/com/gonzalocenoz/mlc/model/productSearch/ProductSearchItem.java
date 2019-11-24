@@ -11,7 +11,7 @@ public class ProductSearchItem implements Serializable {
   @SerializedName("title")
   private String title;
   @SerializedName("price")
-  private Double price;
+  private String price;
   @SerializedName("currency_id")
   private String currencyId;
   @SerializedName("condition")
@@ -19,6 +19,17 @@ public class ProductSearchItem implements Serializable {
   @SerializedName("thumbnail")
   private String thumbnail;
 
+  public String getPrice() {
+    return price;
+  }
+
+  public String getCurrencyId() {
+    return currencyId;
+  }
+
+  public String getCondition() {
+    return condition;
+  }
 
   public String getId() {
     return id;
@@ -29,14 +40,13 @@ public class ProductSearchItem implements Serializable {
   }
 
   public String getFormatedPrice()
-  {return price.toString();
-    //AppUtils.getInstance().getCurrencySymbol(currencyId)+ AppUtils.getInstance().formatPrice(price.intValue());
+  {
+    return price.toString();
   }
 
   public String getConditionText()
   {
     return condition;
-    // return AppUtils.getInstance().getConditionText(condition);
   }
 
   public String getThumbnail() {

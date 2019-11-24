@@ -161,7 +161,8 @@ public class ProductsSearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-                if(!newText.equals(productsSearchViewModel.getProductSearchQuery().getValue()))
+                if(!newText.equals(productsSearchViewModel.getProductSearchQuery().getValue())
+                        && recyclerViewProductSearchHistory.getVisibility() != View.VISIBLE)
                 {
                     recyclerViewProductSearchHistory.setVisibility(View.VISIBLE);
                     recyclerViewProductsSearch.setVisibility(View.INVISIBLE);

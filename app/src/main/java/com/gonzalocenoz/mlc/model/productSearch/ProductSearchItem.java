@@ -1,5 +1,6 @@
 package com.gonzalocenoz.mlc.model.productSearch;
 
+import com.gonzalocenoz.mlc.utils.Utils;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -11,7 +12,7 @@ public class ProductSearchItem implements Serializable {
   @SerializedName("title")
   private String title;
   @SerializedName("price")
-  private String price;
+  private Double price;
   @SerializedName("currency_id")
   private String currencyId;
   @SerializedName("condition")
@@ -19,16 +20,12 @@ public class ProductSearchItem implements Serializable {
   @SerializedName("thumbnail")
   private String thumbnail;
 
-  public String getPrice() {
+  public Double getPrice() {
     return price;
   }
 
   public String getCurrencyId() {
     return currencyId;
-  }
-
-  public String getCondition() {
-    return condition;
   }
 
   public String getId() {
@@ -41,12 +38,12 @@ public class ProductSearchItem implements Serializable {
 
   public String getFormatedPrice()
   {
-    return price.toString();
+    return  Utils.getInstance().FormatPrice(currencyId, price);
   }
 
   public String getConditionText()
   {
-    return condition;
+    return  Utils.getInstance().FormatCondition(condition);
   }
 
   public String getThumbnail() {

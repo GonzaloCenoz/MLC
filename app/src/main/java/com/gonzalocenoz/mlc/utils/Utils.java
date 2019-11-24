@@ -26,4 +26,21 @@ public class Utils {
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    public String FormatCondition(String condition) {
+        return condition.equals("new")?"Producto nuevo":"Producto usado";
+    }
+
+    public String FormatPrice(String currencyId, Double price) {
+        return currencyId + " " + String.format("%,.2f", price);
+    }
+
+    public String FormatAcceptsMP(Boolean amp) {
+        return String.format("Acepta MercadoPago : %s" , amp?"Si":"No");
+    }
+
+    public String FormatAvailableQuatity(Integer aq) {
+        return String.format("Cantidad disponible : %d " , aq);
+    }
+
+
 }

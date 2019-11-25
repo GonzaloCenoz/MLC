@@ -1,3 +1,40 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="searchBarLeftPadding">10dp</dimen>
+    <dimen name="searchBarRightPadding">10dp</dimen>
+    <dimen name="searchBarMargin">10dp</dimen>
+    <dimen name="recyclerViewPadding">5dp</dimen>
+    <dimen name="searchHistoryItemCardMargin">5dp</dimen>
+    <dimen name="cardElevation">5dp</dimen>
+    <dimen name="searchHistoryItemCardTextPadding">5dp</dimen>
+
+    <dimen name="productDetailCardViewMarginHorizontal">5dp</dimen>
+    <dimen name="productDetailCardViewMarginVertical">2dp</dimen>
+
+    <dimen name="productDetailCardViewTextPadding">10dp</dimen>
+    <dimen name="productDetailCardViewTitleTextSize"> 18sp</dimen>
+
+
+    <dimen name="productDetailCardViewPagerHeight">200dp</dimen>
+    <dimen name="productDetailCardViewPagerMarginTop"> 10dp</dimen>
+    <dimen name="productDetailCardViewPagerMarginBottom"> 10dp</dimen>
+
+
+    <dimen name="productSearchHistoryCardViewMarginHorizontal">5dp</dimen>
+    <dimen name="productSearchHistoryCardViewMarginVertical">2dp</dimen>
+
+    <dimen name="productSearchCardViewMarginHorizontal">5dp</dimen>
+    <dimen name="productSearchCardViewMarginVertical">2dp</dimen>
+
+    <dimen name="productSearchItemMargin"> 5dp</dimen>
+    <dimen name="productSearchItemPadding"> 5dp</dimen>
+    <dimen name="productSearchItemTextSize"> 15sp</dimen>
+    <dimen name="productSearchItemImageHeightPortrait"> 100dp</dimen>
+    <dimen name="productSearchItemImageWidthPortrait"> 100dp</dimen>
+
+    <dimen name="productSearchItemImageHeightLandscape"> 120dp</dimen>
+    <dimen name="productSearchItemImageWidthLandscape"> 120dp</dimen>
+
+    <dimen name="productDetailCardViewPagerMarginBotatom"> 10dp</dimen>
+
 </resources>

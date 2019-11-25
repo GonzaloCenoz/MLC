@@ -37,19 +37,20 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="6dp"
-                        android:layout_marginVertical="2dp"
+                        android:layout_marginHorizontal="@dimen/productDetailCardViewMarginHorizontal"
+                        android:layout_marginVertical="@dimen/productDetailCardViewMarginHorizontal"
                         android:clickable="true"
                         android:focusable="true"
                         app:cardCornerRadius="@dimen/cardview_default_radius"
-                        app:cardElevation="5dp">
+                        app:cardElevation="@dimen/cardElevation">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp"
-                            android:textSize="18sp"
+                            android:padding="@dimen/productDetailCardViewTextPadding"
+                            android:textSize="@dimen/productDetailCardViewTitleTextSize"
+
                             android:textStyle="bold"
                             android:text="@{productDetailViewModel.getProduct().getTitle()}" />
 
@@ -59,12 +60,12 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="6dp"
-                        android:layout_marginVertical="2dp"
+                        android:layout_marginHorizontal="@dimen/productDetailCardViewMarginHorizontal"
+                        android:layout_marginVertical="@dimen/productDetailCardViewMarginHorizontal"
                         android:clickable="true"
                         android:focusable="true"
                         app:cardCornerRadius="@dimen/cardview_default_radius"
-                        app:cardElevation="5dp">
+                        app:cardElevation="@dimen/cardElevation">
 
                         <ProgressBar
                             android:id="@+id/progressBarLoadingProductDetailImages"
@@ -78,9 +79,9 @@
                         <androidx.viewpager.widget.ViewPager
                             android:id="@+id/viewPagerPictures"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
+                            android:layout_height="@dimen/productDetailCardViewPagerHeight"
+                            android:layout_marginTop="@dimen/productDetailCardViewPagerMarginTop"
+                            android:layout_marginBottom="@dimen/productDetailCardViewPagerMarginBotatom"
                             android:visibility="visible"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -90,74 +91,72 @@
 
                     </androidx.cardview.widget.CardView>
 
-
-
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="6dp"
-                        android:layout_marginVertical="2dp"
+                        android:layout_marginHorizontal="@dimen/productDetailCardViewMarginHorizontal"
+                        android:layout_marginVertical="@dimen/productDetailCardViewMarginHorizontal"
                         android:clickable="true"
                         android:focusable="true"
                         app:cardCornerRadius="@dimen/cardview_default_radius"
-                        app:cardElevation="5dp">
+                        app:cardElevation="@dimen/cardElevation">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center_vertical"
-                            android:padding="10dp"
+                            android:padding="@dimen/productDetailCardViewTextPadding"
                             android:text="@{productDetailViewModel.getProduct().getFormattedPrice()}" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="6dp"
-                        android:layout_marginVertical="2dp"
+                        android:layout_marginHorizontal="@dimen/productDetailCardViewMarginHorizontal"
+                        android:layout_marginVertical="@dimen/productDetailCardViewMarginHorizontal"
                         android:clickable="true"
                         android:focusable="true"
                         app:cardCornerRadius="@dimen/cardview_default_radius"
-                        app:cardElevation="5dp">
+                        app:cardElevation="@dimen/cardElevation">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
+                            android:padding="@dimen/productDetailCardViewTextPadding"
                             android:text="@{productDetailViewModel.getProduct().getFormattedAvailableQuantity()}" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="6dp"
-                        android:layout_marginVertical="2dp"
+                        android:layout_marginHorizontal="@dimen/productDetailCardViewMarginHorizontal"
+                        android:layout_marginVertical="@dimen/productDetailCardViewMarginHorizontal"
                         android:clickable="true"
                         android:focusable="true"
                         app:cardCornerRadius="@dimen/cardview_default_radius"
-                        app:cardElevation="5dp">
+                        app:cardElevation="@dimen/cardElevation">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
+                            android:padding="@dimen/productDetailCardViewTextPadding"
                             android:text="@{productDetailViewModel.getProduct().getFormattedCondition()}" />
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="6dp"
-                        android:layout_marginVertical="2dp"
+                        android:layout_marginHorizontal="@dimen/productDetailCardViewMarginHorizontal"
+                        android:layout_marginVertical="@dimen/productDetailCardViewMarginHorizontal"
                         android:clickable="true"
                         android:focusable="true"
                         app:cardCornerRadius="@dimen/cardview_default_radius"
-                        app:cardElevation="5dp">
+                        app:cardElevation="@dimen/cardElevation">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
+                            android:padding="@dimen/productDetailCardViewTextPadding"
                             android:text="@{productDetailViewModel.getProduct().getFormattedAcceptsMercadopago()}" />
                     </androidx.cardview.widget.CardView>
 

@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="visible"
-        android:padding="5dp"
+        android:padding="@dimen/recyclerViewPadding"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
         >
@@ -32,7 +32,7 @@
         android:id="@+id/recyclerViewProductsSearchHistory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp"
+        android:padding="@dimen/recyclerViewPadding"
         android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"        >
     </androidx.recyclerview.widget.RecyclerView>

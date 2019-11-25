@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gonzalocenoz.mlc.R;
+
 import com.gonzalocenoz.mlc.databinding.ProductSearchHistoryItemBinding;
 import com.gonzalocenoz.mlc.model.productSearch.ProductSearchHistoryItem;
 
@@ -31,7 +32,7 @@ public class ProductsSearchHistoryAdapter extends RecyclerView.Adapter<ProductsS
     @Override
     public ProductSearchHistoryItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        ProductSearchHistoryItemBinding b = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.product_search_history_item,parent,false);
+        ProductSearchHistoryItemBinding  b = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),R.layout.product_search_history_item,parent,false);
 
         ProductSearchHistoryItemViewHolder pshvw = new ProductSearchHistoryItemViewHolder(b);
         pshvw.SetProductsSearchViewModel(productsSearchViewModel);

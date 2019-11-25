@@ -1,14 +1,14 @@
 package com.gonzalocenoz.mlc.model.productSearch;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.BaseObservable;
+
 
 
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class ProductSearchHistoryItem extends BaseObservable {
+public class ProductSearchHistoryItem{
 
     @SerializedName("query")
     private String query;
